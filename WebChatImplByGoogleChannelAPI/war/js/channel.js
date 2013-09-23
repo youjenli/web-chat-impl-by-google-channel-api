@@ -42,7 +42,7 @@ function onMessage(m){
 };
 
 function onError(e){
-	alert("Exception has occured \n" + "Description : " + e.description
+	alert("Exception occurs \n" + "Description : " + e.description
 			+ "\n" + "Exception Code : " + e.code  + "\n");
 };
 

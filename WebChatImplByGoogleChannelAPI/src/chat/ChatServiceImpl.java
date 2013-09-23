@@ -95,7 +95,7 @@ public class ChatServiceImpl implements ChatService, ServletContextListener {
 			if (clientMap.putIfAbsent(userName, TEMP_DATA) == null) {
 				ChannelService service = ChannelServiceFactory
 						.getChannelService();
-				String token = service.createChannel(userName + System.currentTimeMillis() );
+				String token = service.createChannel(userName);
 				if ( token != null ){
 					this.updateUserList(userName, true);
 					clientMap.put(userName, token);

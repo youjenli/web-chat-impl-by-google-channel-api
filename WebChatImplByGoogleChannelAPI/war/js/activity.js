@@ -1,38 +1,32 @@
-function privateMessage(data) {
-	var list = document.getElementById('privateMessage');
+function privateMessage(data) { //update private message board ui
 	var li = document.createElement('li');
 	li.innerHTML = data;
 
-	list.appendChild(li);
+	$('#privateMessage')[0].appendChild(li);
 };
 
-function newUser(data) {
-	var list = $('#userList')[0];
+function newUser(data) { // update user list ui
 	var li = document.createElement('li');
 	li.setAttribute("id", "u1" + data);
 	li.innerHTML = data;
-	list.appendChild(li);
+	$('#userList')[0].appendChild(li);
 
-	var user = $('user');
 	var option = document.createElement('option');
 	option.setAttribute("id", "u2" + data);
 	option.innerHTML = data;
-	user.appendChild(option);
+	$('#user')[0].appendChild(option);
 };
 
 // remove user
-function deleteUser(data) {
+function deleteUser(data) {// update user list ui 
 	$('#u1' + data).remove();
 	$('#u2' + data).remove();
 };
 
-// new public message
-function newMessage(data) {
-	var list = document.getElementById('messageList');
+function newMessage(data) {//update public message board ui
 	var li = document.createElement('li');
 	li.innerHTML = data;
-
-	list.appendChild(li);
+	$('#messageList')[0].appendChild(li);
 };
 
 function sendMessage() {
@@ -43,9 +37,9 @@ function sendMessage() {
 				+ chatTargetParam + "=" + $("#user").val() + "&"
 				+ chatUserNameParam + "=" + chatUserName
 	});
-	var list = $("#privateMessage")[0];
+
 	var li = document.createElement('li');
 	li.innerHTML = "I send message to " + $("#user").val() + ": "
 			+ $("#message").val();
-	list.appendChild(li);
+	$("#privateMessage")[0].appendChild(li);
 }

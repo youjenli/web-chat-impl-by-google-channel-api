@@ -16,17 +16,17 @@
     if (contextPath == null) {
         contextPath = "";
     }
-    String userName = request.getParameter(ChatService.USER_NAME_PARAM);
+    String currentUserName = request.getParameter(ChatService.USER_NAME_PARAM);
     %>
     contextPath = "<%=contextPath%>";
-    chatUserName = "<%=userName%>";
+    chatUserName = "<%=currentUserName%>";
     chatMessageParam = "<%=ChatService.CHAT_MESSAGE_PARAM%>";
     chatTargetParam ="<%=ChatService.TARGET_PARAM%>";
     chatUserNameParam = "<%=ChatService.USER_NAME_PARAM%>";
-    channelToken = "<%=(String) request.getAttribute(ChatService.CHANNELTOKEN_ATTR_NAME)%>";
+    channelToken = "<%=(String)request.getAttribute(ChatService.CHANNELTOKEN_ATTR_NAME)%>";
 </script>
-<script type="text/javascript" src="js/channel.js"></script>
 <script type="text/javascript" src="js/activity.js"></script>
+<script type="text/javascript" src="js/channel.js"></script>
 </head>
 <body onunload="onClosed()">
 
@@ -41,7 +41,6 @@
 			<div>個人聊天訊息</div>
 			<div id="privateMessage"
 				style="height: 150px; overflow: scroll; border: solid 1px black;">
-
 			</div>
 			<br />
 			<%
@@ -55,7 +54,7 @@
 					<%
 					    if (userSet != null) {
 					        for (String user : userSet) {
-					            if (!user.equalsIgnoreCase(userName)) {
+					            if (!user.equalsIgnoreCase(currentUserName)) {
 					%>
 					<option id="u2<%=user%>" value="<%=user%>"><%=user%></option>
 					<%
@@ -63,8 +62,9 @@
 					        }
 					    }
 					%>
-				</select> <input type="text" id="message" size="40"></input> <input
-					type="button" value="發言" onclick="sendMessage()">
+				</select> 
+				 <input type="text" id="message" size="40"></input>
+				 <input type="button" value="發言" onclick="sendMessage()">
 			</div>
 		</div>
 		<div class="grid_2">
@@ -73,7 +73,7 @@
 				<%
 				    if (userSet != null) {
 				        for (String user : userSet) {
-				            if (!user.equalsIgnoreCase(userName)) {
+				            if (!user.equalsIgnoreCase(currentUserName)) {
 				%>
 				<li id="u1<%=user%>"><%=user%></li>
 				<%

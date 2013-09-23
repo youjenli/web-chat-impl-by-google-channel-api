@@ -21,6 +21,8 @@ public class MessageReceivingServlet extends HttpServlet {
 	private ChatService chatService = null;
 
 	public static String channelToken = "channelToken";
+	public static final String CHAT_ROOM_PATH = "/WEB-INF/jsp/chat.jsp";
+	public static final String REGISTRATION_PATH = "/Registration";
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -70,7 +72,7 @@ public class MessageReceivingServlet extends HttpServlet {
 			request.setAttribute(ChatService.USER_SERVICE_EXCEPTION_ATTR,
 					ChatService.MISSING_USER_NAME);
 			RequestDispatcher dispatcher = request
-					.getRequestDispatcher("/Registration");
+					.getRequestDispatcher(REGISTRATION_PATH);
 			dispatcher.forward(request, response);
 		}
 		String registration = request
@@ -78,13 +80,13 @@ public class MessageReceivingServlet extends HttpServlet {
 		if (registration != null
 		        && registration.equalsIgnoreCase("true") == true ) {
 				//&& new Boolean(registration).booleanValue() == true) {
-			// registration
+			// check if this client wants to register or send up message
 			String token = chatService.addNewClient(userName); 
 			if ( token != null) {// add new client succeed
 				request.setAttribute(ChatService.CHANNELTOKEN_ATTR_NAME, token);
 				request.setAttribute(ChatService.USER_NAME_PARAM, userName);
 				RequestDispatcher dispatcher = request
-						.getRequestDispatcher("/Chat");
+						.getRequestDispatcher(CHAT_ROOM_PATH);
 				dispatcher.forward(request, response);
 			} else {
 				request.setAttribute(ChatService.USER_SERVICE_EXCEPTION_ATTR,
@@ -93,7 +95,7 @@ public class MessageReceivingServlet extends HttpServlet {
 						.getRequestDispatcher("/Registration");
 				dispatcher.forward(request, response);
 			}
-		} else {// already registered ???
+		} else {// Chat room member send up message
 				String chatMessage = request
 						.getParameter(ChatService.CHAT_MESSAGE_PARAM);
 				if (chatMessage == null) {
