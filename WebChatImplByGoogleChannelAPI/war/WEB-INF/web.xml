@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+
+	<welcome-file-list>
+		<welcome-file>/login</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+		<servlet-name>Chat</servlet-name>
+		<jsp-file>/WEB-INF/jsp/chat.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Chat</servlet-name>
+		<url-pattern>/Chat</url-pattern>
+		<url-pattern>/chat</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<description></description>
+		<display-name>MessageReceivingServlet</display-name>
+		<servlet-name>MessageReceivingServlet</servlet-name>
+		<servlet-class>chat.servlet.MessageReceivingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MessageReceivingServlet</servlet-name>
+		<url-pattern>/MessageReceivingServlet</url-pattern>
+		<url-pattern>/MessageReceive</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Registration</servlet-name>
+		<jsp-file>/register.jsp</jsp-file>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Registration</servlet-name>
+		<url-pattern>/Registration</url-pattern>
+		<url-pattern>/registration</url-pattern>
+		<url-pattern>/Register</url-pattern>
+		<url-pattern>/register</url-pattern>
+		<url-pattern>/Login</url-pattern>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>chat.ChatServiceImpl</listener-class>
+	</listener>
+
+	<servlet>
+		<description></description>
+		<display-name>ClientDisconnectHandler</display-name>
+		<servlet-name>ClientDisconnectHandler</servlet-name>
+		<servlet-class>chat.servlet.ClientDisconnectHandler</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ClientDisconnectHandler</servlet-name>
+		<url-pattern>/ClientDisconnectHandler</url-pattern>
+		<url-pattern>/_ah/channel/disconnected/</url-pattern>
+		<url-pattern>/-ah/channel/connected/</url-pattern>
+	</servlet-mapping>
+</web-app>
