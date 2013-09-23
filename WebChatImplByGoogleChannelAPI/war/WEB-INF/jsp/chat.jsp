@@ -6,42 +6,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="js/jquery-1.6.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/960.css" />
+<script type="text/javascript" src="js/jquery-1.6.min.js"></script>
 <script src='/_ah/channel/jsapi'></script>
 <title>Channel API Chat Demo</title>
 <script type="text/javascript">
+    <%
+    String contextPath = this.getServletContext().getContextPath();
+    if (contextPath == null) {
+        contextPath = "";
+    }
+    String userName = request.getParameter(ChatService.USER_NAME_PARAM);
+    %>
+    contextPath = "<%=contextPath%>";
+    chatUserName = "<%=userName%>";
+    chatMessageParam = "<%=ChatService.CHAT_MESSAGE_PARAM%>";
+    chatTargetParam ="<%=ChatService.TARGET_PARAM%>";
+    chatUserNameParam = "<%=ChatService.USER_NAME_PARAM%>";
     channelToken = "<%=(String) request.getAttribute(ChatService.CHANNELTOKEN_ATTR_NAME)%>";
 </script>
 <script type="text/javascript" src="js/channel.js"></script>
 <script type="text/javascript" src="js/activity.js"></script>
 </head>
 <body onunload="onClosed()">
-	<%
-	    String contextPath = this.getServletContext().getContextPath();
-	    if (contextPath == null) {
-	        contextPath = "";
-	    }
-	    String userName = request.getParameter(ChatService.USER_NAME_PARAM);
-	%>
 
-	<script type="text/javascript">
-	function sendMessage() {
-	$.ajax(
-		{
-		type : "POST",
-		url : "<%=contextPath%>/MessageReceivingServlet",
-		data: "<%=ChatService.CHAT_MESSAGE_PARAM%>=" + $("#message").val() 
-		    + "&<%=ChatService.TARGET_PARAM%>=" + $("#user").val() 
-		    + "&<%=ChatService.USER_NAME_PARAM%>=<%=userName%>"
-			});
-			var list = document.getElementById('privateMessage');
-			var li = document.createElement('li');
-			li.innerHTML = "I send message to " + $("#user").val() + ": "
-					+ $("#message").val();
-			list.appendChild(li);
-		}
-	</script>
 	<div class="container_12">
 		<div class="grid_10">
 			<div>公共聊天訊息</div>

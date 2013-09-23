@@ -7,13 +7,13 @@ function privateMessage(data) {
 };
 
 function newUser(data) {
-	var list = document.getElementById('userList');
+	var list = $('#userList')[0];
 	var li = document.createElement('li');
 	li.setAttribute("id", "u1" + data);
 	li.innerHTML = data;
 	list.appendChild(li);
 
-	var user = document.getElementById('user');
+	var user = $('user');
 	var option = document.createElement('option');
 	option.setAttribute("id", "u2" + data);
 	option.innerHTML = data;
@@ -34,3 +34,18 @@ function newMessage(data) {
 
 	list.appendChild(li);
 };
+
+function sendMessage() {
+	$.ajax({
+		type : "POST",
+		url : contextPath + "/MessageReceivingServlet",
+		data : chatMessageParam + "=" + $("#message").val() + "&"
+				+ chatTargetParam + "=" + $("#user").val() + "&"
+				+ chatUserNameParam + "=" + chatUserName
+	});
+	var list = $("#privateMessage")[0];
+	var li = document.createElement('li');
+	li.innerHTML = "I send message to " + $("#user").val() + ": "
+			+ $("#message").val();
+	list.appendChild(li);
+}
