@@ -10,18 +10,18 @@
 <link rel="stylesheet" type="text/css" href="css/960.css" />
 <script src='/_ah/channel/jsapi'></script>
 <title>Channel API Chat Demo</title>
+<script type="text/javascript">
+    channelToken = "<%=(String) request.getAttribute(ChatService.CHANNELTOKEN_ATTR_NAME)%>";
+</script>
 <script type="text/javascript" src="js/channel.js"></script>
 <script type="text/javascript" src="js/activity.js"></script>
 </head>
 <body onunload="onClosed()">
 	<%
-	    String channelToken = (String) request
-	            .getAttribute(ChatService.CHANNELTOKEN_ATTR_NAME);
 	    String contextPath = this.getServletContext().getContextPath();
 	    if (contextPath == null) {
 	        contextPath = "";
 	    }
-
 	    String userName = request.getParameter(ChatService.USER_NAME_PARAM);
 	%>
 

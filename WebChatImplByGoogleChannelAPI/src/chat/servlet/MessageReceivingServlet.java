@@ -66,7 +66,7 @@ public class MessageReceivingServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String userName = request.getParameter(ChatService.USER_NAME_PARAM);
-		if (userName == null) {
+		if (userName == null) { //Empty user name input
 			request.setAttribute(ChatService.USER_SERVICE_EXCEPTION_ATTR,
 					ChatService.MISSING_USER_NAME);
 			RequestDispatcher dispatcher = request
@@ -80,7 +80,7 @@ public class MessageReceivingServlet extends HttpServlet {
 				//&& new Boolean(registration).booleanValue() == true) {
 			// registration
 			String token = chatService.addNewClient(userName); 
-			if ( token != null) {
+			if ( token != null) {// add new client succeed
 				request.setAttribute(ChatService.CHANNELTOKEN_ATTR_NAME, token);
 				request.setAttribute(ChatService.USER_NAME_PARAM, userName);
 				RequestDispatcher dispatcher = request

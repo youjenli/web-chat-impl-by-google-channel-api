@@ -5,7 +5,7 @@ function onOpened() {
 };
 
 function openChannel() {
-	var channel = new goog.appengine.Channel("<%=channelToken%>");
+	var channel = new goog.appengine.Channel(channelToken);
 	var handler = {
 		'onopen' : onOpened,
 		'onmessage' : onMessage,
