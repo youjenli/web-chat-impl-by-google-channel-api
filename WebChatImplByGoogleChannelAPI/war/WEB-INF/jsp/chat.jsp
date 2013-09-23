@@ -10,113 +10,21 @@
 <link rel="stylesheet" type="text/css" href="css/960.css" />
 <script src='/_ah/channel/jsapi'></script>
 <title>Channel API Chat Demo</title>
-<%
-    String channelToken = (String) request
-            .getAttribute(ChatService.CHANNELTOKEN_ATTR_NAME);
-    String contextPath = this.getServletContext().getContextPath();
-    if (contextPath == null) {
-        contextPath = "";
-    }
-%>
-<script type="text/javascript" src="js/channel.js">
-var socket;
-//add new user
-
-function onOpened() {
-};
-
-function openChannel() {
-	var channel = new goog.appengine.Channel("<%=channelToken%>");
-	var handler = {
-		'onopen' : onOpened,
-		'onmessage' : onMessage,
-		'onerror' : onError,
-		'onclose' : onClosed,
-	};
-	socket = channel.open(handler);
-};
-
-function onMessage(m){
-	response = JSON.parse(m.data);
-	if (response.message != null && response.sender != null
-			&& response.broadCast != null) {
-		if (response.broadCast == 'true' ) {
-		    var msg = response.sender + " said to All : "
-				+ response.message;
-		    newMessage(msg);
-	    } else {
-		    var msg = response.sender + " said to you : "
-			+ response.message;
-		    privateMessage(msg);
-	    }
-	}
-	if (response.addUser != null) {
-		newUser(response.addUser);
-		var msg = "Welcome " + response.addUser + " join our room!";
-		newMessage(msg);
-	}
-	if (response.removeUser != null) {
-		deleteUser(response.removeUser);
-		var msg = response.removeUser + " left this room!";
-		newMessage(msg);
-	}
-};
-
-function onError(e){
-	alert("Exception has occured \n" + "Description : " + e.description
-			+ "\n" + "Exception Code : " + e.code);
-};
-
-function onClosed() {
-	socket.close();
-};
-
-setTimeout(openChannel, 100);
-</script>
-<script>
-//new private message
-function privateMessage(data) {
-	var list = document.getElementById('privateMessage');
-	var li = document.createElement('li');
-	li.innerHTML = data;
-
-	list.appendChild(li);
-};
-
-function newUser(data) {
-	var list = document.getElementById('userList');
-	var li = document.createElement('li');
-	li.setAttribute("id", "u1" + data);
-	li.innerHTML = data;
-	list.appendChild(li);
-
-	var user = document.getElementById('user');
-	var option = document.createElement('option');
-	option.setAttribute("id", "u2" + data);
-	option.innerHTML = data;
-	user.appendChild(option);
-};
-
-//remove user
-function deleteUser(data) {
-	$('#u1' + data).remove();
-	$('#u2' + data).remove();
-};
-
-//new public message  
-function newMessage(data) {
-	var list = document.getElementById('messageList');
-	var li = document.createElement('li');
-	li.innerHTML = data;
-
-	list.appendChild(li);
-};
-</script>
+<script type="text/javascript" src="js/channel.js"></script>
+<script type="text/javascript" src="js/activity.js"></script>
 </head>
 <body onunload="onClosed()">
 	<%
+	    String channelToken = (String) request
+	            .getAttribute(ChatService.CHANNELTOKEN_ATTR_NAME);
+	    String contextPath = this.getServletContext().getContextPath();
+	    if (contextPath == null) {
+	        contextPath = "";
+	    }
+
 	    String userName = request.getParameter(ChatService.USER_NAME_PARAM);
 	%>
+
 	<script type="text/javascript">
 	function sendMessage() {
 	$.ajax(

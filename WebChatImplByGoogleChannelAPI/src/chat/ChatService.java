@@ -6,14 +6,14 @@ public interface ChatService {
 
 	public static final String USER_NAME_PARAM = "UserName";
 	
+	public String USER_REGISTRATION_PARAM = "registration";
+	
 	public String USER_SERVICE_EXCEPTION_ATTR = 
 		"User service Exception :";
 	
 	public static final String CHAT_SERVICE_NAME = "ChatService";
 	
 	public String MISSING_USER_NAME = "Missing user name.";
-	
-	public String USER_REGISTRATION_PARAM = "registration";
 	
 	public String USER_NAME_IN_USE = "user name already exists";
 	

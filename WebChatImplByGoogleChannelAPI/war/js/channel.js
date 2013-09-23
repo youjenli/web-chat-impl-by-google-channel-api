@@ -43,11 +43,11 @@ function onMessage(m){
 
 function onError(e){
 	alert("Exception has occured \n" + "Description : " + e.description
-			+ "\n" + "Exception Code : " + e.code);
+			+ "\n" + "Exception Code : " + e.code  + "\n");
 };
 
 function onClosed() {
 	socket.close();
 };
 
-setTimeout(openChannel, 100);
+setTimeout(openChannel, 500);

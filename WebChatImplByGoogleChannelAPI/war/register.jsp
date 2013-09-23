@@ -16,17 +16,16 @@
 	   }
 	%>
 	<form method="post" action="<%=contextPath%>/MessageReceivingServlet">
-		Input your nick name: <input
-			name="<%=ChatService.USER_NAME_PARAM%>" type="text" /> <input
-			name="<%=ChatService.USER_REGISTRATION_PARAM%>" type="hidden"
-			value="true" /> <input name="submitBtn" type="submit" value="Submit"><br />
+		Input your nick name: <input 	name="<%=ChatService.USER_NAME_PARAM%>" type="text" /> 
+		<input name="<%=ChatService.USER_REGISTRATION_PARAM%>" type="hidden"	 value="true" />
+		<input name="submitBtn" type="submit" value="Submit"><br />
 		<%
 			String errorMsg = request
 					.getParameter(ChatService.USER_SERVICE_EXCEPTION_ATTR);
 			if (errorMsg != null) {
 				out.print(errorMsg);
 			}
-		%><br />
+		%>
 	</form>
 </body>
 </html>

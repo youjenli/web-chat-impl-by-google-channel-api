@@ -76,8 +76,9 @@ public class MessageReceivingServlet extends HttpServlet {
 		String registration = request
 				.getParameter(ChatService.USER_REGISTRATION_PARAM);
 		if (registration != null
-				&& new Boolean(registration).booleanValue() == true) {
-			// register
+		        && registration.equalsIgnoreCase("true") == true ) {
+				//&& new Boolean(registration).booleanValue() == true) {
+			// registration
 			String token = chatService.addNewClient(userName); 
 			if ( token != null) {
 				request.setAttribute(ChatService.CHANNELTOKEN_ATTR_NAME, token);
@@ -92,7 +93,7 @@ public class MessageReceivingServlet extends HttpServlet {
 						.getRequestDispatcher("/Registration");
 				dispatcher.forward(request, response);
 			}
-		} else {// already registered
+		} else {// already registered ???
 				String chatMessage = request
 						.getParameter(ChatService.CHAT_MESSAGE_PARAM);
 				if (chatMessage == null) {

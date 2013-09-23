@@ -5,11 +5,7 @@
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
-	<welcome-file-list>
-		<welcome-file>/login</welcome-file>
-	</welcome-file-list>
-	
-	<servlet>
+ 	<servlet>
 		<servlet-name>Chat</servlet-name>
 		<jsp-file>/WEB-INF/jsp/chat.jsp</jsp-file>
 	</servlet>
@@ -20,7 +16,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 
 	<servlet>
-		<description></description>
 		<display-name>MessageReceivingServlet</display-name>
 		<servlet-name>MessageReceivingServlet</servlet-name>
 		<servlet-class>chat.servlet.MessageReceivingServlet</servlet-class>
@@ -48,9 +43,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<listener>
 		<listener-class>chat.ChatServiceImpl</listener-class>
 	</listener>
-
+ 
 	<servlet>
-		<description></description>
 		<display-name>ClientDisconnectHandler</display-name>
 		<servlet-name>ClientDisconnectHandler</servlet-name>
 		<servlet-class>chat.servlet.ClientDisconnectHandler</servlet-class>
@@ -61,4 +55,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/_ah/channel/disconnected/</url-pattern>
 		<url-pattern>/-ah/channel/connected/</url-pattern>
 	</servlet-mapping>
+<!-- 
+    <welcome-file-list>
+        <welcome-file>/index.html</welcome-file>
+    </welcome-file-list>
+-->
 </web-app>
